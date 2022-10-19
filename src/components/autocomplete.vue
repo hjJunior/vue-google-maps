@@ -41,13 +41,12 @@ const props = {
 export default {
   expose: ['build'],
   mounted() {
-    if (this.$slots.default || this.$scopedSlots.default) return;
+    if (this.$slots.default || this.$scopedSlots.default) return
     this.build();
   },
   methods: {
     build(ref) {
       const selfRef = ref ?? this.$refs.input;
-
       this.$gmapApiPromiseLazy().then(() => {
         if (this.selectFirstOnEnter) {
           downArrowSimulator(selfRef)
