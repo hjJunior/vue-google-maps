@@ -39,6 +39,7 @@ const props = {
 }
 
 export default {
+  expose: ['build'],
   mounted() {
     if (this.$slots.default || this.$scopedSlots.default) return;
     this.build();
