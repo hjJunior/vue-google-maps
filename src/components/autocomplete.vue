@@ -44,10 +44,12 @@ export default {
     this.build();
   },
   methods: {
-    build() {
+    build(ref) {
+      const selfRef = ref ?? this.$refs.input;
+
       this.$gmapApiPromiseLazy().then(() => {
         if (this.selectFirstOnEnter) {
-          downArrowSimulator(this.$refs.input)
+          downArrowSimulator(selfRef)
         }
 
         if (typeof google.maps.places.Autocomplete !== 'function') {
@@ -62,7 +64,7 @@ export default {
           ...this.options,
         }
 
-        this.$autocomplete = new google.maps.places.Autocomplete(this.$refs.input, finalOptions)
+        this.$autocomplete = new google.maps.places.Autocomplete(selfRef, finalOptions)
         bindProps(this, this.$autocomplete, mappedProps)
 
         this.$watch('componentRestrictions', (v) => {
